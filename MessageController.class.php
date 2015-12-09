@@ -44,9 +44,9 @@ s (569 sloc)  22 KB
       $period_type = array_var($_GET, 'period', Cookie::getValue('messagesPeriodType', 'fresh'));
       $expiration = Cookie::getValue('remember'.TOKEN_COOKIE_NAME) ? REMEMBER_LOGIN_LIFETIME : null;
       Cookie::setValue('messagesPeriodType', $period_type, $expiration);
-      $archive_condition = ' AND `updated_on` >= (now() - interval 7 day)';
+      $archive_condition = ' AND `updated_on` >= (now() - interval 900 day)';
       if ($period_type == 'archive') {
-        $archive_condition = ' AND `updated_on` < (now() - interval 7 day)';
+        $archive_condition = ' AND `updated_on` < (now() - interval 900 day)';
       }
       $conditions = logged_user()->isMemberOfOwnerCompany() ? 
         array('`project_id` = ?' . $archive_condition , active_project()->getId()) :
